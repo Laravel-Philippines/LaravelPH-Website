@@ -35,7 +35,7 @@ return array(
         'pgsql' => array(
             'driver'   => 'pgsql',
             'host'     => 'localhost',
-            'database' => 'laravelph',
+            'database' => 'laravelph_test',
             'username' => 'homestead',
             'password' => 'secret',
             'charset'  => 'utf8',
