@@ -123,6 +123,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
 		'LaravelPH\LaravelPH\ServiceProviders\Application',
+		'LaravelPH\User\ServiceProviders\Application',
 
 	),
 

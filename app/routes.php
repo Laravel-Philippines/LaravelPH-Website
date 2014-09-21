@@ -12,3 +12,5 @@
 */
 
 Route::get('/', ['as' => 'laravelph.showHomePage', 'uses' => 'LaravelPH\LaravelPH\Controllers\LaravelPHController@showHomePage']);
+
+Route::resource('users', 'LaravelPH\User\Controllers\UserController');
