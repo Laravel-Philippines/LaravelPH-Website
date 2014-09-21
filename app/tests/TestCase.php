@@ -2,6 +2,30 @@
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase {
 
+    protected $user;
+    protected $rawPassword = 'dummypassword';
+
+    public function setUp()
+    {
+        parent::setUp();
+        Artisan::call('migrate');
+    }
+
+    public function tearDown()
+    {
+    	Artisan::call('migrate:reset');
+    }
+
+    protected function createUser()
+    {
+        $user = new User;
+        $user->username = 'johndoe25';
+        $user->password = $this->rawPassword;
+        $user->email = 'johndoe25@gmail.com';
+        $user->save();
+        $this->user = $user;
+    }
+
 	/**
 	 * Creates the application.
 	 *
