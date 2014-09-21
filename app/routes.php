@@ -11,7 +11,4 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', ['as' => 'laravelph.showHomePage', 'uses' => 'LaravelPH\LaravelPH\Controllers\LaravelPHController@showHomePage']);
