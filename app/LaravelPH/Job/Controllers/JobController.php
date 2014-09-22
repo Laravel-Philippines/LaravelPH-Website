@@ -6,6 +6,7 @@ use Illuminate\Routing\Redirector;
 
 use BaseController;
 use LaravelPH\Job\Forms\JobForm;
+use Job;
 
 class JobController extends BaseController {
 
@@ -13,18 +14,31 @@ class JobController extends BaseController {
     protected $input;
     protected $redirect;
     protected $form;
+    protected $job;
 
     public function __construct(ViewFactory $view,
                                 Request $input,
                                 Redirector $redirect,
-                                JobForm $form)
+                                JobForm $form,
+                                Job $job)
     {
         $this->view = $view;
         $this->input = $input;
         $this->redirect = $redirect;
         $this->form = $form;
+        $this->job = $job;
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        return $this->view->make('Job::job.list')
+            ->with('jobs', $this->job->all());
+    }
 
     /**
      * Show the form for creating a new resource.
