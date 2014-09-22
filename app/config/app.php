@@ -124,6 +124,7 @@ return array(
 
 		'LaravelPH\LaravelPH\ServiceProviders\Application',
 		'LaravelPH\User\ServiceProviders\Application',
+		'LaravelPH\Session\ServiceProviders\Application',
 
 	),
 

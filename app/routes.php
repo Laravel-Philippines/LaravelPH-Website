@@ -11,6 +11,10 @@
 |
 */
 
+Route::when('*', 'csrf', array('post'));
+
 Route::get('/', ['as' => 'laravelph.showHomePage', 'uses' => 'LaravelPH\LaravelPH\Controllers\LaravelPHController@showHomePage']);
 
 Route::resource('users', 'LaravelPH\User\Controllers\UserController');
+
+Route::resource('sessions', 'LaravelPH\Session\Controllers\SessionController');
