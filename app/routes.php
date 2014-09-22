@@ -18,3 +18,5 @@ Route::get('/', ['as' => 'laravelph.showHomePage', 'uses' => 'LaravelPH\LaravelP
 Route::resource('users', 'LaravelPH\User\Controllers\UserController');
 
 Route::resource('sessions', 'LaravelPH\Session\Controllers\SessionController');
+
+Route::resource('jobs', 'LaravelPH\Job\Controllers\JobController');
