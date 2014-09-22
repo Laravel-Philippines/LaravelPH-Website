@@ -74,4 +74,17 @@ class JobController extends BaseController {
             ->withErrors($this->form->errors());
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        $job = $this->job->find($id);
+        return $this->view->make('Job::job.detail')
+            ->with('job', $job);
+    }
+
 }
