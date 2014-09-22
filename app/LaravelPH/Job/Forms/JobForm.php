@@ -4,15 +4,15 @@ use Illuminate\Validation\Factory as ValidatorFactory;
 use Illuminate\Auth\AuthManager;
 
 use Job;
+use LaravelPH\Common\Forms\BaseForm;
 
-class JobForm
+class JobForm extends BaseForm
 {
     protected $rules = [
         'title' => 'required',
         'description' => 'required',
     ];
 
-    protected $validatorFactory;
     protected $auth;
     protected $job;
 
@@ -20,7 +20,7 @@ class JobForm
                                 AuthManager $auth,
                                 Job $job)
     {
-        $this->validatorFactory = $validatorFactory;
+        parent::__construct($validatorFactory);
         $this->auth = $auth;
         $this->job = $job;
     }
@@ -37,14 +37,4 @@ class JobForm
         return $this->job->save();
     }
 
-    public function validate($data)
-    {
-        $this->validator = $this->validatorFactory->make($data, $this->rules);
-        return $this->validator->passes();
-    }
-
-    public function errors()
-    {
-        return $this->validator->errors();
-    }
 }

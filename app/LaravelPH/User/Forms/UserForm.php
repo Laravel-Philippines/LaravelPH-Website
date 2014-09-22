@@ -3,8 +3,9 @@
 use Illuminate\Validation\Factory as ValidatorFactory;
 
 use User;
+use LaravelPH\Common\Forms\BaseForm;
 
-class UserForm
+class UserForm extends BaseForm
 {
     protected $rules = [
         'username' => 'required|between:3,16|unique:users',
@@ -13,13 +14,12 @@ class UserForm
         'email' => 'required|email|unique:users'
     ];
 
-    protected $validatorFactory;
     protected $user;
 
     public function __construct(ValidatorFactory $validatorFactory,
                                 User $user)
     {
-        $this->validatorFactory = $validatorFactory;
+        parent::__construct($validatorFactory);
         $this->user = $user;
     }
 
@@ -35,14 +35,4 @@ class UserForm
         return $this->user->save();
     }
 
-    public function validate($data)
-    {
-        $this->validator = $this->validatorFactory->make($data, $this->rules);
-        return $this->validator->passes();
-    }
-
-    public function errors()
-    {
-        return $this->validator->errors();
-    }
 }
