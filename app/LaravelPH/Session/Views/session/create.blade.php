@@ -8,8 +8,8 @@
 
     <form method="POST" action="{{ route('sessions.store') }}" accept-charset="UTF-8">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <input name="username" type="text" placeholder="Enter username">
-        <input name="password" type="password" value="" placeholder="Enter password">
+        <input name="username" type="text" placeholder="Enter username" value="{{ Input::old('username') }}">
+        <input name="password" type="password" placeholder="Enter password" value="{{ Input::old('password') }}">
         <input type="submit" value="Sign In">
     </form>
 

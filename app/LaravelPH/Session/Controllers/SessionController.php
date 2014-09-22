@@ -55,6 +55,7 @@ class SessionController extends BaseController {
         }
 
         return $this->redirect->route('sessions.create')
+            ->withInput()
             ->with('message', 'Wrong username or password');
     }
 
