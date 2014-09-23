@@ -64,7 +64,7 @@ class JobControllerTest extends TestCase
         $this->assertSessionHas('errors');
     }
 
-    public function testStoreShouldRedirectBackOnRegistrationPageOnInvalidInput()
+    public function testStoreShouldRedirectBackToCreateAJobPageOnInvalidInput()
     {
         $inputs = [];
         $response = $this->call('POST', route('jobs.store', $inputs));
