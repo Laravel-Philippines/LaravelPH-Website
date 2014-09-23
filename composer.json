@@ -1,7 +1,7 @@
 {
-	"name": "laravel/laravel",
-	"description": "The Laravel Framework.",
-	"keywords": ["framework", "laravel"],
+	"name": "Laravel-Philippines/LaravelPH-Website",
+	"description": "The Laravel Philippines website.",
+	"keywords": ["framework", "laravel", "Philippines", "collaboration"],
 	"license": "MIT",
 	"type": "project",
 	"require": {
@@ -39,5 +39,5 @@
 	"config": {
 		"preferred-install": "dist"
 	},
-	"minimum-stability": "stable"
+	"minimum-stability": "dev"
 }
