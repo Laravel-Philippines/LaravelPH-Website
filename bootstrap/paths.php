@@ -54,4 +54,14 @@ return array(
 
 	'storage' => __DIR__.'/../app/storage',
 
+	/*
+	|--------------------------------------------------------------------------
+	| Homestead Path
+	|--------------------------------------------------------------------------
+	|
+	| The Homestead path is used by this repo for EASY access for vagrant.
+	|
+	*/
+	'homestead' => __DIR__.'/../homestead',
+
 );
