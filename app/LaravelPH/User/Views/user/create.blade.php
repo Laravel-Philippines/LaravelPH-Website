@@ -2,17 +2,16 @@
 
 @section('content')
 
-    <h3>Sign Up</h3>
+    <h1>Sign Up</h1>
 
     @include('partials/form-errors')
 
-    <form method="POST" action="{{ route('users.store') }}" accept-charset="UTF-8">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <input name="username" type="text">
-        <input name="email" type="email">
-        <input name="password" type="password" value="">
-        <input name="password_confirmation" type="password">
-        <input type="submit" value="Sign up">
-    </form>
+    {{ Form::open(['route' => 'users.store']) }}
+        <div>{{ Form::text('username', '', ['class' => 'form-control', 'placeholder' => 'Username']) }}</div>
+        <div>{{ Form::email('email', '', ['class' => 'form-control', 'placeholder' => 'YourEmail@mailprovider.com']) }}</div>
+        <div>{{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Your Unique Password']) }}</div>
+        <div>{{ Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => 'Confirm your password']) }}</div>
+        <div>{{ Form::submit('Sign Up', ['class' => 'form-control']) }}</div>
+    {{ Form::close() }}
 
 @stop
