@@ -7,4 +7,5 @@ composer.phar
 Thumbs.db
 /.idea
 .env.local.php
+/.vagrant
 
