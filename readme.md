@@ -1,6 +1,6 @@
 ## Laravel Philippines Website
 
-[![Build Status](https://travis-ci.org/Laravel-Philippines/LaravelPH-Website.svg)](https://travis-ci.org/Laravel-Philippines/LaravelPH-Website)
+[![Build Status](https://travis-ci.org/Laravel-Philippines/LaravelPH-Website.svg?branch=master)](https://travis-ci.org/Laravel-Philippines/LaravelPH-Website)
 
 Facebook Group - https://www.facebook.com/groups/laravelph
 
