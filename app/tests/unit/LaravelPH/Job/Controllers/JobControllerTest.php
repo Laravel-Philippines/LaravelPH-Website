@@ -1,8 +1,6 @@
 <?php namespace Tests\Unit\LaravelPH\User\Controllers;
 
 use TestCase;
-use Hash;
-
 use Job;
 
 class JobControllerTest extends TestCase
