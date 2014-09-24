@@ -8,10 +8,17 @@ use User;
 
 class SessionFormTest extends TestCase
 {
+    protected $form;
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->form = new SessionForm($this->app->make('auth'));
+    }
+
     public function testCreateShouldReturnFalseWhenPassedWithInvalidCredentials()
     {
-        $form = new SessionForm($this->app->make('auth'));
-        $this->assertFalse($form->create([]));
+        $this->assertFalse($this->form->create([]));
     }
 
     public function testCreateShouldReturnTrueWhenPassedWithValidCredentials()
@@ -23,8 +30,7 @@ class SessionFormTest extends TestCase
             'password' => $this->rawPassword
         ];
 
-        $form = new SessionForm($this->app->make('auth'));
-        $this->assertTrue($form->create($inputs));
+        $this->assertTrue($this->form->create($inputs));
     }
 
 }
