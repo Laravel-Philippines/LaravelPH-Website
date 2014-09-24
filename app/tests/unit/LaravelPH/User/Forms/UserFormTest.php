@@ -8,10 +8,17 @@ use User;
 
 class UserFormTest extends TestCase
 {
+    protected $form;
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->form = new UserForm($this->app->make('validator'), new User);
+    }
+
     public function testCreateShouldReturnFalseWhenPassedWithAnEmptyArray()
     {
-        $form = new UserForm($this->app->make('validator'), new User);
-        $this->assertFalse($form->create([]));
+        $this->assertFalse($this->form->create([]));
     }
 
     public function testCreateShouldReturnTrueWhenPassedWithValidInputs()
@@ -23,8 +30,7 @@ class UserFormTest extends TestCase
             'email' => 'johndoe25@gmail.com'
         ];
 
-        $form = new UserForm($this->app->make('validator'), new User);
-        $this->assertTrue($form->create($inputs));
+        $this->assertTrue($this->form->create($inputs));
     }
 
     public function testCreateShouldReturnFalseWhenEmailIsInvalid()
@@ -36,8 +42,7 @@ class UserFormTest extends TestCase
             'email' => 'invalid email'
         ];
 
-        $form = new UserForm($this->app->make('validator'), new User);
-        $this->assertFalse($form->create($inputs));
+        $this->assertFalse($this->form->create($inputs));
     }
 
     public function testCreateShouldReturnFalseWhenPasswordIsLessThan8Characters()
@@ -49,8 +54,7 @@ class UserFormTest extends TestCase
             'email' => 'johndoe25@gmail.com'
         ];
 
-        $form = new UserForm($this->app->make('validator'), new User);
-        $this->assertFalse($form->create($inputs));
+        $this->assertFalse($this->form->create($inputs));
     }
 
     public function testCreateShouldReturnFalseWhenPasswordDoesntMatchPasswordConfirmation()
@@ -62,8 +66,7 @@ class UserFormTest extends TestCase
             'email' => 'johndoe25@gmail.com'
         ];
 
-        $form = new UserForm($this->app->make('validator'), new User);
-        $this->assertFalse($form->create($inputs));
+        $this->assertFalse($this->form->create($inputs));
     }
 
     public function testCreateShouldReturnFalseWhenUsernameIsLessThan3Characters()
@@ -75,8 +78,7 @@ class UserFormTest extends TestCase
             'email' => 'johndoe25@gmail.com'
         ];
 
-        $form = new UserForm($this->app->make('validator'), new User);
-        $this->assertFalse($form->create($inputs));
+        $this->assertFalse($this->form->create($inputs));
     }
 
     public function testCreateShouldReturnFalseWhenUsernameIsMoreThan16Characters()
@@ -88,8 +90,7 @@ class UserFormTest extends TestCase
             'email' => 'johndoe25@gmail.com'
         ];
 
-        $form = new UserForm($this->app->make('validator'), new User);
-        $this->assertFalse($form->create($inputs));
+        $this->assertFalse($this->form->create($inputs));
     }
 
     public function testCreateShouldReturnFalseWhenEmailIsAlreadyUsed()
@@ -103,8 +104,7 @@ class UserFormTest extends TestCase
             'email' => $this->user->email
         ];
 
-        $form = new UserForm($this->app->make('validator'), new User);
-        $this->assertFalse($form->create($inputs));
+        $this->assertFalse($this->form->create($inputs));
     }
 
     public function testCreateShouldReturnFalseWhenUsernameIsAlreadyUsed()
@@ -118,8 +118,7 @@ class UserFormTest extends TestCase
             'email' => 'ken@gmail.com'
         ];
 
-        $form = new UserForm($this->app->make('validator'), new User);
-        $this->assertFalse($form->create($inputs));
+        $this->assertFalse($this->form->create($inputs));
     }
 
 }
