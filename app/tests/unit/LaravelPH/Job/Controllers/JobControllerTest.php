@@ -1,5 +1,8 @@
 <?php namespace Tests\Unit\LaravelPH\User\Controllers;
 
+use Route;
+use Event;
+
 use TestCase;
 use Job;
 
@@ -9,6 +12,13 @@ class JobControllerTest extends TestCase
     {
         $crawler = $this->client->request('GET', route('jobs.create'));
         $this->assertTrue($this->client->getResponse()->isOk());
+    }
+
+    public function testCreateShouldRedirectToLoginPageIfUserIsNotAuthenticated()
+    {
+        Route::enableFilters();
+        $crawler = $this->client->request('GET', route('jobs.create'));
+        $this->assertRedirectedToRoute('sessions.create');
     }
 
     public function testIndexShouldShowJobs()
@@ -29,6 +39,14 @@ class JobControllerTest extends TestCase
         $response = $this->call('GET', route('jobs.show', $job->id));
         $view = $response->original;
         $this->assertEquals($job->title, $view['job']->title);
+    }
+
+    public function testStoreShouldRedirectToLoginPageIfUserIsNotAuthenticated()
+    {
+        Route::enableFilters();
+        Event::forget('router.filter: csrf');
+        $response = $this->call('POST', route('jobs.store', []));
+        $this->assertRedirectedToRoute('sessions.create');
     }
 
     public function testStoreShouldBeAbleToSuccessfullyCreateAJob()

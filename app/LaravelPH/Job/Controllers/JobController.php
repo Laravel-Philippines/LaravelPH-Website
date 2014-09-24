@@ -22,6 +22,8 @@ class JobController extends BaseController {
                                 JobForm $form,
                                 Job $job)
     {
+        $this->beforeFilter('auth', ['only' => ['create', 'store']]);
+
         $this->view = $view;
         $this->input = $input;
         $this->redirect = $redirect;
