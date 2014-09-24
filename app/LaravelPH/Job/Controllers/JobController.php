@@ -64,9 +64,8 @@ class JobController extends BaseController {
         );
 
         if ($this->form->create($params)) {
-            return 'Job created';
-            // return $this->redirect->route('laravelph.showHomePage')
-            //     ->with('message', 'Successfully logged-in');
+            return $this->redirect->route('jobs.index')
+                ->with('message', 'Job successfully posted');
         }
 
         return $this->redirect->route('jobs.create')
