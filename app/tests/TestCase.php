@@ -26,6 +26,12 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
         $this->user = $user;
     }
 
+    protected function createAndLoginUser()
+    {
+        $this->createUser();
+        $this->be($this->user);
+    }
+
 	/**
 	 * Creates the application.
 	 *

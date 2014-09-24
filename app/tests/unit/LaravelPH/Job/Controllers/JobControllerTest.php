@@ -33,8 +33,7 @@ class JobControllerTest extends TestCase
 
     public function testStoreShouldBeAbleToSuccessfullyCreateAJob()
     {
-        $this->createUser();
-        $this->be($this->user);
+        $this->createAndLoginUser();
 
         $inputs = [
             'title' => 'php dev',
