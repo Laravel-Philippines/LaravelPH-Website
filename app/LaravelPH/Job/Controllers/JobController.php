@@ -39,7 +39,7 @@ class JobController extends BaseController {
     public function index()
     {
         return $this->view->make('Job::job.list')
-            ->with('jobs', $this->job->paginate(25));
+            ->with('jobs', $this->job->getAllPaginated());
     }
 
     /**
