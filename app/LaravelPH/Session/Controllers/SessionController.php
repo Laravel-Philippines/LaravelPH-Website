@@ -3,6 +3,7 @@
 use Illuminate\View\Factory as ViewFactory;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Auth\AuthManager;
 
 use BaseController;
 use LaravelPH\Session\Forms\SessionForm;
@@ -13,15 +14,18 @@ class SessionController extends BaseController {
     protected $input;
     protected $redirect;
     protected $form;
+    protected $auth;
 
     public function __construct(ViewFactory $view,
                                 Request $input,
                                 Redirector $redirect,
+                                AuthManager $auth,
                                 SessionForm $form)
     {
         $this->view = $view;
         $this->input = $input;
         $this->redirect = $redirect;
+        $this->auth = $auth;
         $this->form = $form;
     }
 
@@ -57,6 +61,18 @@ class SessionController extends BaseController {
         return $this->redirect->route('sessions.create')
             ->withInput()
             ->with('message', 'Wrong username or password');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        $this->auth->logout();
+        return $this->redirect->route('laravelph.showHomePage');
     }
 
 }
