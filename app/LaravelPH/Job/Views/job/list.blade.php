@@ -4,7 +4,9 @@
 
     <h3>Jobs list</h3>
 
-    @include('partials/form-errors')
+    @if(Auth::check())
+        <a href="{{ route('jobs.create') }}">Post a job</a>
+    @endif
 
     <ul>
         @foreach($jobs as $job)
