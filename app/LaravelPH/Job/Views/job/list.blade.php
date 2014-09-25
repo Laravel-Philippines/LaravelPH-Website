@@ -16,4 +16,6 @@
         @endforeach
     </ul>
 
+    {{ $jobs->links() }}
+
 @stop
