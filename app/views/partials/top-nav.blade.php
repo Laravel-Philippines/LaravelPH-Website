@@ -16,6 +16,9 @@
             <li>
                 <a href="{{ route('sessions.create') }}">Sign In</a>
             </li>
+            <li>
+                <a href="{{ route('users.create') }}">Sign Up</a>
+            </li>
         @endif
     </ul>
 </div>
