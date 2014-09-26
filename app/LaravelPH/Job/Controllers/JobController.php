@@ -4,6 +4,8 @@ use Illuminate\View\Factory as ViewFactory;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 
+use GrahamCampbell\Markdown\Markdown;
+
 use BaseController;
 use LaravelPH\Job\Forms\JobForm;
 use Job;
@@ -15,10 +17,12 @@ class JobController extends BaseController {
     protected $redirect;
     protected $form;
     protected $job;
+    protected $markdown;
 
     public function __construct(ViewFactory $view,
                                 Request $input,
                                 Redirector $redirect,
+                                Markdown $markdown,
                                 JobForm $form,
                                 Job $job)
     {
@@ -27,6 +31,7 @@ class JobController extends BaseController {
         $this->view = $view;
         $this->input = $input;
         $this->redirect = $redirect;
+        $this->markdown = $markdown;
         $this->form = $form;
         $this->job = $job;
     }
@@ -83,8 +88,10 @@ class JobController extends BaseController {
      */
     public function show($id)
     {
+        $job = $this->job->findPublishedByIdOrFail($id);
+        $job->description = $this->markdown->render(e($job->description));
         return $this->view->make('Job::job.detail')
-            ->with('job', $this->job->findPublishedByIdOrFail($id));
+            ->with('job', $job);
     }
 
 }
