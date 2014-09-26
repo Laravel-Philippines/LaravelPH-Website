@@ -8,15 +8,19 @@
         <a href="{{ route('jobs.create') }}">Post a job</a>
     @endif
 
-    <ul>
-        @foreach($jobs as $job)
-            <li>
-                <h3>{{ $job->title }}</h3>
-                <p>{{ $job->description }}</p>
-                <p>{{ $job->author->username }}</p>
-            </li>
-        @endforeach
-    </ul>
+    @if($jobs->count())
+        <ul>
+            @foreach($jobs as $job)
+                <li>
+                    <h3>{{ $job->title }}</h3>
+                    <p>{{ $job->description }}</p>
+                    <p>{{ $job->author->username }}</p>
+                </li>
+            @endforeach
+        </ul>
+    @else
+        <p>No jobs available.</p>
+    @endif
 
     {{ $jobs->links() }}
 
