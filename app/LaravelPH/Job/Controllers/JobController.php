@@ -39,7 +39,7 @@ class JobController extends BaseController {
     public function index()
     {
         return $this->view->make('Job::job.list')
-            ->with('jobs', $this->job->getAllPaginated());
+            ->with('jobs', $this->job->getAllPublishedPaginated());
     }
 
     /**
@@ -83,9 +83,8 @@ class JobController extends BaseController {
      */
     public function show($id)
     {
-        $job = $this->job->find($id);
         return $this->view->make('Job::job.detail')
-            ->with('job', $job);
+            ->with('job', $this->job->findPublishedByIdOrFail($id));
     }
 
 }

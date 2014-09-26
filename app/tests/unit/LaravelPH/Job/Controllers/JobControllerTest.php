@@ -21,10 +21,33 @@ class JobControllerTest extends TestCase
         $this->assertRedirectedToRoute('sessions.create');
     }
 
-    public function testIndexShouldShowJobs()
+    public function testIndexShouldShowPublishedJobs()
     {
+        $this->createUser();
+        $job = new Job;
+        $job->title = 'php dev';
+        $job->description = 'should be familiar w/ laravel';
+        $job->user_id = $this->user->id;
+        $job->status = 'published';
+        $job->save();
+
         $response = $this->call('GET', route('jobs.index'));
-        $this->assertViewHas('jobs');
+        $view = $response->original;
+        $this->assertEquals(1, $view['jobs']->count());
+    }
+
+    public function testIndexShouldNotShowJobsThatAreNotPublished()
+    {
+        $this->createUser();
+        $job = new Job;
+        $job->title = 'php dev';
+        $job->description = 'should be familiar w/ laravel';
+        $job->user_id = $this->user->id;
+        $job->save();
+
+        $response = $this->call('GET', route('jobs.index'));
+        $view = $response->original;
+        $this->assertEquals(0, $view['jobs']->count());
     }
 
     public function testShowShouldShowTheRequestedJob()
@@ -34,11 +57,27 @@ class JobControllerTest extends TestCase
         $job->title = 'php dev';
         $job->description = 'should be familiar w/ laravel';
         $job->user_id = $this->user->id;
+        $job->status = 'published';
         $job->save();
 
         $response = $this->call('GET', route('jobs.show', $job->id));
         $view = $response->original;
         $this->assertEquals($job->title, $view['job']->title);
+    }
+
+    /**
+     * @expectedException Illuminate\Database\Eloquent\ModelNotFoundException
+     */
+    public function testShowShouldNotShowAJobThatIsNotPublished()
+    {
+        $this->createUser();
+        $job = new Job;
+        $job->title = 'php dev';
+        $job->description = 'should be familiar w/ laravel';
+        $job->user_id = $this->user->id;
+        $job->save();
+
+        $response = $this->call('GET', route('jobs.show', $job->id));
     }
 
     public function testStoreShouldRedirectToLoginPageIfUserIsNotAuthenticated()
