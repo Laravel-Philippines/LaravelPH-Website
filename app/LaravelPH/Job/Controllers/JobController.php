@@ -8,6 +8,7 @@ use GrahamCampbell\Markdown\Markdown;
 
 use BaseController;
 use LaravelPH\Job\Forms\JobForm;
+use LaravelPH\Job\Presenters\Factories\JobPresenterFactory;
 use Job;
 
 class JobController extends BaseController {
@@ -17,23 +18,23 @@ class JobController extends BaseController {
     protected $redirect;
     protected $form;
     protected $job;
-    protected $markdown;
+    protected $jobPresenterFactory;
 
     public function __construct(ViewFactory $view,
                                 Request $input,
                                 Redirector $redirect,
-                                Markdown $markdown,
                                 JobForm $form,
-                                Job $job)
+                                Job $job,
+                                JobPresenterFactory $jobPresenterFactory)
     {
         $this->beforeFilter('auth', ['only' => ['create', 'store']]);
 
         $this->view = $view;
         $this->input = $input;
         $this->redirect = $redirect;
-        $this->markdown = $markdown;
         $this->form = $form;
         $this->job = $job;
+        $this->jobPresenterFactory = $jobPresenterFactory;
     }
 
     /**
@@ -89,7 +90,7 @@ class JobController extends BaseController {
     public function show($id)
     {
         $job = $this->job->findPublishedByIdOrFail($id);
-        $job->description = $this->markdown->render(e($job->description));
+        $job = $this->jobPresenterFactory->make($job);
         return $this->view->make('Job::job.detail')
             ->with('job', $job);
     }
