@@ -10,8 +10,8 @@
         <ul>
             @foreach($jobs as $job)
                 <li>
-                    <h3>{{ $job->title }}</h3>
-                    <p>{{ $job->author->username }}</p>
+                    <h3>{{{ $job->title }}}</h3>
+                    <p>{{{ $job->author->username }}}</p>
                 </li>
             @endforeach
         </ul>
