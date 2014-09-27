@@ -19,4 +19,5 @@ Route::resource('users', 'LaravelPH\User\Controllers\UserController');
 
 Route::resource('sessions', 'LaravelPH\Session\Controllers\SessionController');
 
+Route::get('jobs/search', ['as' => 'jobs.search', 'uses' => 'LaravelPH\Job\Controllers\JobController@search']);
 Route::resource('jobs', 'LaravelPH\Job\Controllers\JobController');

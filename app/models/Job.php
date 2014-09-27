@@ -29,4 +29,18 @@ class Job extends Eloquent
             ->paginate($perPage);
     }
 
+    public function getByQueryPaginated($query, $perPage = 25)
+    {
+        return $this->whereStatus('published')
+            ->where(function ($modelQuery) use ($query)
+            {
+                $query = '%' . strtolower($query) . '%';
+                $modelQuery
+                    ->orWhereRaw('LOWER(title) LIKE ?', array($query))
+                    ->orWhereRaw('LOWER(description) LIKE ?', array($query));
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate($perPage);
+    }
+
 }
