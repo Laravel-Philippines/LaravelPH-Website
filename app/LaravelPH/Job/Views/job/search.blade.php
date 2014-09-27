@@ -2,13 +2,9 @@
 
 @section('content')
 
-    <h3>Jobs list</h3>
-
-    @if(Auth::check())
-        <a href="{{ route('jobs.create') }}">Post a job</a>
-    @endif
-
     @include('Job::partials.search-form')
+
+    <h3>Search results</h3>
 
     @if($jobs->count())
         <ul>
@@ -20,7 +16,7 @@
             @endforeach
         </ul>
     @else
-        <p>No jobs available.</p>
+        <p>No job matches your query.</p>
     @endif
 
     {{ $jobs->links() }}

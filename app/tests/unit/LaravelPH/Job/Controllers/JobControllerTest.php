@@ -140,4 +140,36 @@ class JobControllerTest extends TestCase
         $this->assertRedirectedToRoute('jobs.create');
     }
 
+    public function testSearchShouldFilterJobs()
+    {
+        $this->createUser();
+        $job = new Job;
+        $job->title = 'laravel dev';
+        $job->description = 'should be familiar w/ laravel';
+        $job->user_id = $this->user->id;
+        $job->status = 'published';
+        $job->save();
+
+        $job = new Job;
+        $job->title = 'codeigniter dev';
+        $job->description = 'should be familiar w/ codeigniter';
+        $job->user_id = $this->user->id;
+        $job->status = 'published';
+        $job->save();
+
+
+        $inputs = ['q' => 'laravel'];
+        $response = $this->call('GET', route('jobs.search', $inputs));
+        $view = $response->original;
+        $this->assertEquals(1, $view['jobs']->count());
+    }
+
+    public function testSearchShouldPassQueryToTemplate()
+    {
+        $inputs = ['q' => 'laravel'];
+        $response = $this->call('GET', route('jobs.search', $inputs));
+        $view = $response->original;
+        $this->assertEquals($inputs['q'], $view['query']);
+    }
+
 }

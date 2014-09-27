@@ -95,4 +95,11 @@ class JobController extends BaseController {
             ->with('job', $job);
     }
 
+    public function search()
+    {
+        $query = $this->input->get('q');
+        $jobs = $this->job->getByQueryPaginated($query);
+        return $this->view->make('Job::job.search', compact('jobs', 'query'));
+    }
+
 }
