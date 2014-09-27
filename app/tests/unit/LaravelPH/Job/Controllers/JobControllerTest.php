@@ -80,6 +80,21 @@ class JobControllerTest extends TestCase
         $response = $this->call('GET', route('jobs.show', $job->id));
     }
 
+    public function testShowShouldDecorateTheRequestedJob()
+    {
+        $this->createUser();
+        $job = new Job;
+        $job->title = 'php dev';
+        $job->description = 'should be familiar w/ laravel';
+        $job->user_id = $this->user->id;
+        $job->status = 'published';
+        $job->save();
+
+        $response = $this->call('GET', route('jobs.show', $job->id));
+        $view = $response->original;
+        $this->assertNotInstanceOf('Job', $view['job']);
+    }
+
     public function testStoreShouldRedirectToLoginPageIfUserIsNotAuthenticated()
     {
         Route::enableFilters();
