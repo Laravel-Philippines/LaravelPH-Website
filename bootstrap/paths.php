@@ -1,7 +1,5 @@
 <?php
-
 return array(
-
 	/*
 	|--------------------------------------------------------------------------
 	| Application Path
@@ -12,9 +10,7 @@ return array(
 	| work perfectly fine for the vast majority of all our applications.
 	|
 	*/
-
 	'app' => __DIR__.'/../app',
-
 	/*
 	|--------------------------------------------------------------------------
 	| Public Path
@@ -25,9 +21,7 @@ return array(
 	| point for web requests into these applications from the outside.
 	|
 	*/
-
 	'public' => __DIR__.'/../public',
-
 	/*
 	|--------------------------------------------------------------------------
 	| Base Path
@@ -38,9 +32,7 @@ return array(
 	| is necessary you will do so here, just proceed with some caution.
 	|
 	*/
-
 	'base' => __DIR__.'/..',
-
 	/*
 	|--------------------------------------------------------------------------
 	| Storage Path
@@ -51,7 +43,5 @@ return array(
 	| you want to change the location of this directory for your apps.
 	|
 	*/
-
 	'storage' => __DIR__.'/../app/storage',
-
 );
